@@ -17,6 +17,62 @@ namespace JMBGApp
             InitializeComponent();
         }
 
+        private bool CheckDate(char[] date)
+        {
+            try
+            {
+                int day1 = int.Parse(date[0].ToString());
+                int day2 = int.Parse(date[1].ToString());
+                int month1 = int.Parse(date[2].ToString());
+                int month2 = int.Parse(date[3].ToString());
+                int year1 = int.Parse(date[4].ToString());
+                int year2 = int.Parse(date[5].ToString());
+                int year3 = int.Parse(date[6].ToString());
+
+                int days = day1 * 10 + day2;
+                
+                int years = year1 * 100 + year2 * 10 + year3;
+
+                if (years < 100)
+                {
+                    years = years + 2000;
+                }
+                else
+                {
+                    years = years + 1000;
+                }
+
+                if ((month1 == 0 && (month2 == 1 || month2 == 3 || month2 == 5 || month2 == 7 || month2 == 8)) || (month1 == 1 && (month2 == 0 || month2 == 2)))
+                {
+                    if (days <= 31)
+                    {
+                        return true;
+                    } 
+                } else if (month1 == 0 && month2 == 2)
+                {
+                    if (years % 4 == 0)
+                    {
+                        if (days <= 29)
+                        {
+                            return true;
+                        }
+                    } else
+                    {
+                        if (days <= 28)
+                        {
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
+            catch
+            {
+                MessageBox.Show("Unet JMBG nije u validnom formatu", "Greska", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
         private string CheckDays(char[] days)
         {
             try
@@ -671,6 +727,10 @@ namespace JMBGApp
 
             if (!CheckControlSum(temp.ToCharArray()))
             {
+                return;
+            }
+
+            if (!CheckDate(temp.ToCharArray())) {
                 return;
             }
 
