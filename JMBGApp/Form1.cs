@@ -47,8 +47,10 @@ namespace JMBGApp
                     if (days <= 31)
                     {
                         return true;
-                    } 
-                } else if (month1 == 0 && month2 == 2)
+                    }
+                    MessageBox.Show("Unet JMBG nije u validnom formatu - mesec ima 31 dana", "Greska", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else if (month1 == 0 && month2 == 2)
                 {
                     if (years % 4 == 0)
                     {
@@ -56,13 +58,24 @@ namespace JMBGApp
                         {
                             return true;
                         }
-                    } else
+                        MessageBox.Show("Unet JMBG nije u validnom formatu - mesec februar ima 29 dana", "Greska", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
                     {
                         if (days <= 28)
                         {
                             return true;
                         }
+                        MessageBox.Show("Unet JMBG nije u validnom formatu - mesec februar ima 28 dana", "Greska", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
+                }
+                else
+                {
+                    if (days <= 30)
+                    {
+                        return true;
+                    }
+                    MessageBox.Show("Unet JMBG nije u validnom formatu - mesec ima 30 dana", "Greska", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 return false;
             }
@@ -725,12 +738,13 @@ namespace JMBGApp
                 return;
             }
 
-            if (!CheckControlSum(temp.ToCharArray()))
+            if (!CheckDate(temp.ToCharArray()))
             {
                 return;
             }
 
-            if (!CheckDate(temp.ToCharArray())) {
+            if (!CheckControlSum(temp.ToCharArray()))
+            {
                 return;
             }
 
