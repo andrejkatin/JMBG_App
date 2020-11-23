@@ -1,0 +1,7 @@
+ addons:
+   sonarcloud:
+     organization: "andrejkatin"
+     token:
+       secure: $SONAR_TOKEN
+       
+ 
