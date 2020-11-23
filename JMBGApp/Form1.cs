@@ -19,7 +19,6 @@ namespace JMBGApp
 
         private bool CheckDate(char[] date)
         { 
-
             try
             {
                 int day1 = int.Parse(date[0].ToString());
